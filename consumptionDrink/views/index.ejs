@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include view_header.ejs %>
+
+    <title><%= title %></title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+    <script>
+      $(function(){
+        $('#btn1').click(function(){
+          window.location.href = '/consumption';
+        });
+
+        $('#btn2').click(function(){
+          window.location.href = '/drink';
+        });
+
+        $('btnhome').click(function(){
+          window.location.href = '/';
+        })
+      })
+    </script>
+  </head>
+
+  <body>
+    <% include view_navigator.ejs %>
+
+    <div class="container-fluid body-content">
+      <b class="label label-danger" style="font-size: x-large;">專案首頁</b>
+
+      <button id="btn1" class="btn btn-success btn-md"><b>消費紀錄</b></button>
+      <button id="btn2" class="btn btn-success btn-md"><b>酒櫃管理</b></button>
+      
+      <button id="btnhome" class="btn btn-success btn-md"><b>首頁</b></button>
+    </div>
+  </body>
+</html>

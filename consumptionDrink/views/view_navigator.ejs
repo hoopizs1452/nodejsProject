@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-fixed-top" style="font-family: 標楷體;">
+    <div class="container-fluid">
+        <div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">node-express網路服務操作網站</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a id="home" href="/">首頁</a></li>
+                <li><a id="consumption" href="/consumption">消費紀錄</a></li>
+                <li><a id="drink" href="/drink">酒櫃管理</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar{
+        background-color: orange !important;
+    }
+
+    .navbar .navbar-brand{
+        color: green !important;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .navbar li a{
+        color: #0000ff !important;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    .navbar-nav li a:hover,
+    .navbar-nav li.active a{
+        color: #f4511e !important;
+        background-color: #fff !important;
+    }
+
+    .navbar-default .navbar-toggle{
+        border-color: transparent;
+        color: #fff !important;
+    }
+</style>

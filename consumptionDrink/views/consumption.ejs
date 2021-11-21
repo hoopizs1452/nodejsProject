@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include view_header.ejs %>
+        <title><%= title %></title>
+
+        <script>
+
+            $(function(){
+                
+                //呼叫查詢消費紀錄
+                // $('#btn1').click(function(){
+                //     $.get(
+                //         '/consumption/get',
+                //         function(data){
+                //             $('#result').val(data.result);
+                //             //console.log(JSON.parse(data.result));
+                //         }
+                //     );
+                // });
+                $('#btn1').click(function(){
+                    $.get(
+                        '/consumption/get',
+                        function(data){
+                            // document.body.append(data.name);
+                            //$('body').append(data.result);
+                            for (var i = 0; i < data.length; i++) {
+                                document.body.append(data[i].name);
+                            }
+                        }
+                    );
+                });
+
+                //呼叫新增消費紀錄
+                // $('#btn2').click(function(){
+                //     console.log($('#date').val());
+                //     console.log($('#name').val());
+                //     console.log($('#price').val());
+                //     $.ajax({
+                //     url:"/consumption/add",
+                //     method: "POST",
+                //     data: {date: $('#date').val(), name: $('#name').val(), price: $('#price').val()},
+                //     datatype: "json",
+                //     success: function(data){
+                //             $('#result').val(data.result);
+                //         }
+                //     });
+                // });
+
+                $('#btnhome').click(function(){
+                    window.location.href('/');
+                });
+            });
+        </script>
+    </head>
+
+    <body style="padding-top:70px; font-family:標楷體;">
+        <!-- 包含view_navigator.ejs檔案，以載入使用bootstrap設計之導覽列 -->
+        <% include view_navigator.ejs %>
+        
+        <div class="container-fluid body-content" >
+            <!-- 以下為操作介面UI之設計 -->
+            <div  style="text-align:center;">
+                <!-- 操作介面之標題 -->
+                <b class="label label-danger" style="font-size:x-large">消費紀錄操作網頁</b> <br> <br>
+            
+                <!-- 操作介面之內容 -->
+                <table style="font-size:large; margin-left:auto; margin-right:auto;">
+                    <tr>
+                        <td><b class="text-primary">日期:</b></td>
+                        <td><input type="date" id="date"></td>
+                    </tr>
+                    <tr>
+                        <td><b class="text-primary">消費種類:</b></td>
+                        <td><input id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><b class="text-primary">消費金額:</b></td>
+                        <td><input id="price"></td>
+                    </tr>
+                    <tr>
+                        <td><b class="text-primary">結 果:</b></td>
+                        <td><input type="text" id="result" style="width: auto;height: auto;"></td>
+                    </tr>
+                </table>
+                <button id="btn1" onclick="getList()" class="btn btn-success btn-md"><b>查詢消費紀錄</b></button> 
+                <button id="btn2" class="btn btn-success btn-md" ><b>新增消費紀錄</b></button> 
+                <button id="btn3" class="btn btn-success btn-md"><b>更新消費紀錄</b></button> 
+                <button id="btn4" class="btn btn-success btn-md"><b>刪除消費紀錄</b></button> <br/> <br/>
+            
+                <!-- 回首頁之按鈕 -->
+                <button id="btnhome" class="btn btn-info btn-sm"><b>回首頁</b></button>
+                
+            </div>
+            <script>getList();</script>
+        </div>
+    </body>
+</html>
