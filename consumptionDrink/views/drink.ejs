@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <% include view_header.ejs %>
+        <title><%= title %></title>
+
+        <script>
+
+            $(function(){
+                
+                //呼叫查詢消費紀錄
+                $('#btn1').click(function(){
+                    $.get(
+                        '/consumption/get',
+                        function(data){
+                            // document.body.append(data.name);
+                            //$('body').append(data.result);
+                            for (var i = 0; i < data.length; i++) {
+                                $('#result').append(data[i].name);
+                                $('#result').append(data[i].year);
+                            }
+                        }
+                    );
+                });
+
+                //呼叫新增消費紀錄
+                $('#btn2').click(function(){
+                    console.log($('#name').val());
+                    console.log($('#year').val());
+                    $.ajax({
+                        url:"/drink/add",
+                        method: "POST",
+                        data: {name: $('#name').val(), year: $('#year').val()},
+                        datatype: "json",
+                        success: function(data){
+                            $('#result').val(data.result);
+                        }
+                    });
+                });
+
+                //呼叫刪除消費紀錄
+                $('#btn3').click(function(){
+                    console.log($('#name').val());
+                    console.log($('#year').val());
+                    $.ajax({
+                        url:"/drink/delete",
+                        method: "POST",
+                        data: {name: $('#name').val(), year: $('#year').val()},
+                        datatype: "json",
+                        success: function(data){
+                            $('#result').val(data.result);
+                        }
+                    });
+                });
+            })
+        </script>
+    </head>
+
+    <body style="padding-top:70px; font-family:標楷體;">
+        <!-- 包含view_navigator.ejs檔案，以載入使用bootstrap設計之導覽列 -->
+        <% include view_navigator.ejs %>
+        
+        <div class="container-fluid body-content" >
+            <!-- 以下為操作介面UI之設計 -->
+            <div  style="text-align:center;">
+                <!-- 操作介面之標題 -->
+                <b class="label label-danger" style="font-size:x-large">酒櫃管理操作網頁</b> <br> <br>
+            
+                <!-- 操作介面之內容 -->
+                <table style="font-size:large; margin-left:auto; margin-right:auto;">
+                    <tr>
+                        <td><b class="text-primary">酒名:</b></td>
+                        <td><input id="name"></td>
+                    </tr>
+                    <tr>
+                        <td><b class="text-primary">年份:</b></td>
+                        <td><input id="year"></td>
+                    </tr>
+                    <tr>
+                        <td><b class="text-primary">結 果:</b></td>
+                        <td><textarea id="result" name="result" style="width:300px; height: 150px;"></textarea></td>
+                    </tr>
+                </table>
+                <button id="btn1" class="btn btn-success btn-md"><b>查詢酒類紀錄</b></button> 
+                <button id="btn2" class="btn btn-success btn-md" ><b>新增酒類紀錄</b></button> 
+                <button id="btn3" class="btn btn-success btn-md"><b>刪除酒類紀錄</b></button>
+            </div>
+            <!-- <script>getList();</script> -->
+        </div>
+    </body>
+</html>

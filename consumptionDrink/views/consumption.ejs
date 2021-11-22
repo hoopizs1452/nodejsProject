@@ -9,15 +9,6 @@
             $(function(){
                 
                 //呼叫查詢消費紀錄
-                // $('#btn1').click(function(){
-                //     $.get(
-                //         '/consumption/get',
-                //         function(data){
-                //             $('#result').val(data.result);
-                //             //console.log(JSON.parse(data.result));
-                //         }
-                //     );
-                // });
                 $('#btn1').click(function(){
                     $.get(
                         '/consumption/get',
@@ -25,32 +16,47 @@
                             // document.body.append(data.name);
                             //$('body').append(data.result);
                             for (var i = 0; i < data.length; i++) {
-                                document.body.append(data[i].name);
+                                //document.body.append(data[i].name);
+                                $('#result').append(data[i].date.substr(0,10));
+                                $('#result').append(data[i].name);
+                                $('#result').append(data[i].price);
                             }
                         }
                     );
                 });
 
                 //呼叫新增消費紀錄
-                // $('#btn2').click(function(){
-                //     console.log($('#date').val());
-                //     console.log($('#name').val());
-                //     console.log($('#price').val());
-                //     $.ajax({
-                //     url:"/consumption/add",
-                //     method: "POST",
-                //     data: {date: $('#date').val(), name: $('#name').val(), price: $('#price').val()},
-                //     datatype: "json",
-                //     success: function(data){
-                //             $('#result').val(data.result);
-                //         }
-                //     });
-                // });
-
-                $('#btnhome').click(function(){
-                    window.location.href('/');
+                $('#btn2').click(function(){
+                    console.log($('#date').val());
+                    console.log($('#name').val());
+                    console.log($('#price').val());
+                    $.ajax({
+                        url:"/consumption/add",
+                        method: "POST",
+                        data: {date: $('#date').val(), name: $('#name').val(), price: $('#price').val()},
+                        datatype: "json",
+                        success: function(data){
+                            $('#result').val(data.result);
+                        }
+                    });
                 });
-            });
+
+                //呼叫刪除消費紀錄
+                $('#btn3').click(function(){
+                    console.log($('#date').val());
+                    console.log($('#name').val());
+                    console.log($('#price').val());
+                    $.ajax({
+                        url:"/consumption/delete",
+                        method: "POST",
+                        data: {date: $('#date').val(), name: $('#name').val(), price: $('#price').val()},
+                        datatype: "json",
+                        success: function(data){
+                            $('#result').val(data.result);
+                        }
+                    });
+                });
+            })
         </script>
     </head>
 
@@ -80,19 +86,14 @@
                     </tr>
                     <tr>
                         <td><b class="text-primary">結 果:</b></td>
-                        <td><input type="text" id="result" style="width: auto;height: auto;"></td>
+                        <td><textarea id="result" name="result" style="width:300px; height: 150px;"></textarea></td>
                     </tr>
                 </table>
-                <button id="btn1" onclick="getList()" class="btn btn-success btn-md"><b>查詢消費紀錄</b></button> 
+                <button id="btn1" class="btn btn-success btn-md"><b>查詢消費紀錄</b></button> 
                 <button id="btn2" class="btn btn-success btn-md" ><b>新增消費紀錄</b></button> 
-                <button id="btn3" class="btn btn-success btn-md"><b>更新消費紀錄</b></button> 
-                <button id="btn4" class="btn btn-success btn-md"><b>刪除消費紀錄</b></button> <br/> <br/>
-            
-                <!-- 回首頁之按鈕 -->
-                <button id="btnhome" class="btn btn-info btn-sm"><b>回首頁</b></button>
-                
+                <button id="btn3" class="btn btn-success btn-md"><b>刪除消費紀錄</b></button>
             </div>
-            <script>getList();</script>
+            <!-- <script>getList();</script> -->
         </div>
     </body>
 </html>

@@ -1,24 +1,7 @@
-// var mongoose = require('mongoose');
-// mongoose.connect('mongodb://localhost/test', { useNewUrlParser: true });
-
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'connection error:'));
-// // db.once('open', function(){
-// //   console.log('Connected!');
-// // });
-
-// var testSchema = new mongoose.Schema({
-//   date: Date,
-//   name: String,
-//   price: String
-// });
-
-// testSchema.set('collation', 'consumption'); //新增需要這行，查詢不需要這行
-//var testModel = mongoose.model('consumption', testSchema);
-
 var express = require('express');
 var router = express.Router();
 var consumptionmodel = require('../models/consumptionmodel.js');
+var drinkmodel = require('../models/drink.js');
 
 // var sip = require('underscore').chain(require('os').networkInterfaces()).values()
 //     .flatten().find({family: 'IPv4', internal: false}).values().address;
@@ -32,12 +15,13 @@ router.get('/', function(req, res) {
   res.render('index.ejs', { title: '專案首頁' });
 });
 
+//消費紀錄
 router.get('/consumption', function(req, res){
   res.render('consumption.ejs', {title:"消費紀錄操作網頁"});
 });
 
 // router.get('/addconsumption', function(req, res){
-//   var newconsumption = new consumptionmodel({date:2021-11-21, 
+//   var newconsumption = new consumptionmodel({date:2021-11-21,
 //     Name:"lunch", price:"100"});
 
 //     newconsumption.save(function(err, data) {
@@ -52,7 +36,8 @@ router.get('/consumption', function(req, res){
 
 //新增消費紀錄
 router.post('/consumption/add', function(req, res){
-  res.setHeader('Access-Control-Allow-Origin', '*'); // 允許其他網站的網頁存取此服務
+  // res.setHeader('Access-Control-Allow-Origin', '*');
+  //res.setHeader('Content-Type', 'text/html');
   //testSchema.set('collation', 'consumption');
   var item = new consumptionmodel({
     date: req.body.date,
@@ -74,13 +59,6 @@ router.post('/consumption/add', function(req, res){
   console.log(req.body.date);
   console.log(req.body.name);
   console.log(req.body.price);
-
-  res.set(
-    {
-      'charset': 'utf-8'  
-    });
-
-  res.send({result: "Thank for submit the form"});
 });
 
 //取得消費紀錄
@@ -91,35 +69,13 @@ router.get('/consumption/get', function(req, res){
   });
 });
 
-//修改更新紀錄
-router.post('/consumption/update', function(req, res){
-  var id = req.body.id;
-  consumptionmodel.findById(id, function(req, data){
-    if(err){
-      console.log(err);
-      res.json({"status": 1, "msg": "error"});
-    }
-    else{
-      data.date = req.body.date;
-      data.name = req.body.name;
-      data.price = req.body.price;
-      data.save(function(err){
-        if(err){
-          console.log(err);
-          res.json({"status": 1, "msg": "error"});
-        }
-        else{
-          res.json({"status": 0, "msg": "success"});
-        }
-      });
-    }
-  });
-});
-
 //刪除消費紀錄
 router.post('/consumption/delete', function(req, res){
-  var id = req.body.id;
-  consumptionmodel.remove({_id: id}, function(err, data){
+  var date = req.body.date;
+  var name = req.body.name;
+  var price = req.body.price;
+
+  consumptionmodel.remove({date: date, name: name, price: price}, function(err, data){
     if(err){
       console.log(err);
       res.json({"status": 1, "msg": "error"});
@@ -130,10 +86,55 @@ router.post('/consumption/delete', function(req, res){
   });
 });
 
+//酒櫃管理
 router.get('/drink', function(req, res){
   res.render('drink.ejs', {title:"酒櫃管理操作網頁"});
 });
 
-//router.post('')
+//新增酒類
+router.post('/drink/add', function(req, res){
+  var item = new drinkmodel({
+    name: req.body.name,
+    year: req.body.year
+  });
+
+  item.save(function(err, data){
+    if(err){
+      res.json({"status":1,"msg":"error"});
+      console.log('add error!');
+    }
+    else{
+      res.json({ "status": 0, "msg": "success", data: data });
+      console.log('add success!');
+    }
+  });
+
+  console.log(req.body.name);
+  console.log(req.body.year);
+});
+
+//取得酒類
+router.get('/drink/get', function(req, res){
+  drinkmodel.find(function(err, data){
+    if(err) console.log(err);
+    res.json(data);
+  });
+});
+
+//刪除酒類
+router.post('/drink/delete', function(req, res){
+  var name = req.body.name;
+  var year = req.body.year;
+
+  drinkmodel.remove({name: name, year: year}, function(err, data){
+    if(err){
+      console.log(err);
+      res.json({"status": 1, "msg": "error"});
+    }
+    else{
+      res.json({"status": 0, "msg": "success"});
+    }
+  });
+});
 
 module.exports = router;
