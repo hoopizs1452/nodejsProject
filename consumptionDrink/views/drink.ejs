@@ -11,7 +11,7 @@
                 //呼叫查詢消費紀錄
                 $('#btn1').click(function(){
                     $.get(
-                        '/consumption/get',
+                        '/drink/get',
                         function(data){
                             // document.body.append(data.name);
                             //$('body').append(data.result);
@@ -54,9 +54,41 @@
                 });
             })
         </script>
+
+        <style>
+            .pic {
+                background-image: url('https://i.imgur.com/EJ5j2N7.jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-color: rgba(0, 0, 0, .3);
+                background-blend-mode: multiply;
+            }
+
+            .button {
+                border: none;
+                background-color: transparent;
+                padding: 8px 16px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 20px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+            }
+            .button1 {
+                background-color: transparent;
+                color: #f1ff00;
+                border: 2px solid #4CAF50;
+            }
+            .button1:hover {
+                background-color: #4CAF50;
+                color: #f1ff00;
+            }
+        </style>
     </head>
 
-    <body style="padding-top:70px; font-family:標楷體;">
+    <body style="padding-top:70px; font-family:標楷體;" class="pic">
         <!-- 包含view_navigator.ejs檔案，以載入使用bootstrap設計之導覽列 -->
         <% include view_navigator.ejs %>
         
@@ -69,21 +101,21 @@
                 <!-- 操作介面之內容 -->
                 <table style="font-size:large; margin-left:auto; margin-right:auto;">
                     <tr>
-                        <td><b class="text-primary">酒名:</b></td>
+                        <td><b style="color: orange; font-size: larger;">酒名:</b></td>
                         <td><input id="name"></td>
                     </tr>
                     <tr>
-                        <td><b class="text-primary">年份:</b></td>
+                        <td><b style="color: orange; font-size: larger;">年份:</b></td>
                         <td><input id="year"></td>
                     </tr>
                     <tr>
-                        <td><b class="text-primary">結 果:</b></td>
+                        <td><b style="color: orange; font-size: larger;">結 果:</b></td>
                         <td><textarea id="result" name="result" style="width:300px; height: 150px;"></textarea></td>
                     </tr>
                 </table>
-                <button id="btn1" class="btn btn-success btn-md"><b>查詢酒類紀錄</b></button> 
-                <button id="btn2" class="btn btn-success btn-md" ><b>新增酒類紀錄</b></button> 
-                <button id="btn3" class="btn btn-success btn-md"><b>刪除酒類紀錄</b></button>
+                <button id="btn1" class="button button1"><b>查詢酒類紀錄</b></button> 
+                <button id="btn2" class="button button1" ><b>新增酒類紀錄</b></button> 
+                <button id="btn3" class="button button1"><b>刪除酒類紀錄</b></button>
             </div>
             <!-- <script>getList();</script> -->
         </div>

@@ -20,25 +20,8 @@ router.get('/consumption', function(req, res){
   res.render('consumption.ejs', {title:"消費紀錄操作網頁"});
 });
 
-// router.get('/addconsumption', function(req, res){
-//   var newconsumption = new consumptionmodel({date:2021-11-21,
-//     Name:"lunch", price:"100"});
-
-//     newconsumption.save(function(err, data) {
-//       if(err) {
-//           console.log(error);
-//       }
-//       else {
-//           res.send("Data inserted");
-//       }
-//   });
-// });
-
 //新增消費紀錄
 router.post('/consumption/add', function(req, res){
-  // res.setHeader('Access-Control-Allow-Origin', '*');
-  //res.setHeader('Content-Type', 'text/html');
-  //testSchema.set('collation', 'consumption');
   var item = new consumptionmodel({
     date: req.body.date,
     name: req.body.name,

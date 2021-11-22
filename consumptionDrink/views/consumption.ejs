@@ -58,9 +58,41 @@
                 });
             })
         </script>
+
+<style>
+    .pic {
+        background-image: url('https://i.imgur.com/jAy0eob.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: rgba(0, 0, 0, .3);
+        background-blend-mode: multiply;
+    }
+
+    .button {
+        border: none;
+        background-color: transparent;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    .button1 {
+        background-color: transparent;
+        color: burlywood;
+        border: 2px solid #4CAF50;
+    }
+    .button1:hover {
+        background-color: #4CAF50;
+        color: burlywood;
+    }
+</style>
     </head>
 
-    <body style="padding-top:70px; font-family:標楷體;">
+    <body style="padding-top:70px; font-family:標楷體;" class="pic">
         <!-- 包含view_navigator.ejs檔案，以載入使用bootstrap設計之導覽列 -->
         <% include view_navigator.ejs %>
         
@@ -73,25 +105,25 @@
                 <!-- 操作介面之內容 -->
                 <table style="font-size:large; margin-left:auto; margin-right:auto;">
                     <tr>
-                        <td><b class="text-primary">日期:</b></td>
+                        <td><b style="color: brown; font-size: larger;">日期:</b></td>
                         <td><input type="date" id="date"></td>
                     </tr>
                     <tr>
-                        <td><b class="text-primary">消費種類:</b></td>
+                        <td><b style="color: brown; font-size: larger;">消費種類:</b></td>
                         <td><input id="name"></td>
                     </tr>
                     <tr>
-                        <td><b class="text-primary">消費金額:</b></td>
+                        <td><b style="color: brown; font-size: larger;">消費金額:</b></td>
                         <td><input id="price"></td>
                     </tr>
                     <tr>
-                        <td><b class="text-primary">結 果:</b></td>
+                        <td><b style="color: brown; font-size: larger;">結 果:</b></td>
                         <td><textarea id="result" name="result" style="width:300px; height: 150px;"></textarea></td>
                     </tr>
                 </table>
-                <button id="btn1" class="btn btn-success btn-md"><b>查詢消費紀錄</b></button> 
-                <button id="btn2" class="btn btn-success btn-md" ><b>新增消費紀錄</b></button> 
-                <button id="btn3" class="btn btn-success btn-md"><b>刪除消費紀錄</b></button>
+                <button id="btn1" class="button button1"><b>查詢消費紀錄</b></button> 
+                <button id="btn2" class="button button1" ><b>新增消費紀錄</b></button> 
+                <button id="btn3" class="button button1"><b>刪除消費紀錄</b></button>
             </div>
             <!-- <script>getList();</script> -->
         </div>

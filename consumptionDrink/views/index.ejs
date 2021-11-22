@@ -20,18 +20,49 @@
         })
       })
     </script>
+
+    <style>
+      .pic {
+          background-image: url('https://i.imgur.com/N7236Xg.jpeg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-color: rgba(0, 0, 0, .3);
+          background-blend-mode: multiply;
+      }
+
+      .button {
+          border: none;
+          background-color: transparent;
+          padding: 14px 40px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 24px;
+          margin: 4px 2px;
+          transition-duration: 0.4s;
+          cursor: pointer;
+      }
+      .button1 {
+          background-color: transparent;
+          color: burlywood;
+          border: 2px solid #4CAF50;
+      }
+      .button1:hover {
+          background-color: #4CAF50;
+          color: burlywood;
+      }
+    </style>
   </head>
 
-  <body>
+  <body style="padding-top:70px; font-family:標楷體;" class="pic">
     <% include view_navigator.ejs %>
 
-    <div class="container-fluid body-content">
-      <b class="label label-danger" style="font-size: x-large;">專案首頁</b>
+    <div align="center" style="font-family: 標楷體">
+      <b class="label label-danger" style="font-size: xx-large;">專案首頁</b><br /><br />
 
-      <button id="btn1" class="btn btn-success btn-md"><b>消費紀錄</b></button>
-      <button id="btn2" class="btn btn-success btn-md"><b>酒櫃管理</b></button>
+      <button id="btn1" class="button button1"><b>消費紀錄</b></button><br /><br />
+      <button id="btn2" class="button button1"><b>酒櫃管理</b></button><br /><br />
       
-      <button id="btnhome" class="btn btn-success btn-md"><b>首頁</b></button>
     </div>
   </body>
 </html>
