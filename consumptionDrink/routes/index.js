@@ -22,6 +22,7 @@ router.get('/consumption', function(req, res){
 
 //新增消費紀錄
 router.post('/consumption/add', function(req, res){
+  var message;
   var item = new consumptionmodel({
     date: req.body.date,
     name: req.body.name,
@@ -30,11 +31,15 @@ router.post('/consumption/add', function(req, res){
 
   item.save(function(err, data){
     if(err){
-      res.json({"status":1,"msg":"error"});
+      //res.json({status:1,msg:"error"});
+      message = "無法除存此筆消費紀錄";
+      res.send({result: message});
       console.log('add error!');
     }
     else{
-      res.json({ "status": 0, "msg": "success", data: data });
+      //res.json({ status: 0, msg: "success", data: data });
+      message = "消費紀錄儲存成功";
+      res.send({result: message});
       console.log('add success!');
     }
   });
@@ -57,14 +62,17 @@ router.post('/consumption/delete', function(req, res){
   var date = req.body.date;
   var name = req.body.name;
   var price = req.body.price;
+  var message;
 
   consumptionmodel.remove({date: date, name: name, price: price}, function(err, data){
     if(err){
       console.log(err);
-      res.json({"status": 1, "msg": "error"});
+      message = "查無此筆消費紀錄";
+      res.send({result: message});
     }
     else{
-      res.json({"status": 0, "msg": "success"});
+      message = "消費紀錄刪除成功";
+      res.send({result: message});
     }
   });
 });
@@ -76,6 +84,7 @@ router.get('/drink', function(req, res){
 
 //新增酒類
 router.post('/drink/add', function(req, res){
+  var message;
   var item = new drinkmodel({
     name: req.body.name,
     year: req.body.year
@@ -83,11 +92,15 @@ router.post('/drink/add', function(req, res){
 
   item.save(function(err, data){
     if(err){
-      res.json({"status":1,"msg":"error"});
+      //res.json({"status":1,"msg":"error"});
+      message = "無法儲存此筆酒櫃紀錄";
+      res.send({result: message});
       console.log('add error!');
     }
     else{
-      res.json({ "status": 0, "msg": "success", data: data });
+      //res.json({ "status": 0, "msg": "success", data: data });
+      message = "酒櫃紀錄儲存成功";
+      res.send({result: message});
       console.log('add success!');
     }
   });
@@ -108,14 +121,19 @@ router.get('/drink/get', function(req, res){
 router.post('/drink/delete', function(req, res){
   var name = req.body.name;
   var year = req.body.year;
+  var message;
 
   drinkmodel.remove({name: name, year: year}, function(err, data){
     if(err){
       console.log(err);
-      res.json({"status": 1, "msg": "error"});
+      //res.json({"status": 1, "msg": "error"});
+      message = "查無此筆酒櫃紀錄";
+      res.send({result: message});
     }
     else{
-      res.json({"status": 0, "msg": "success"});
+      //res.json({"status": 0, "msg": "success"});
+      message = "酒櫃紀錄刪除成功";
+      res.send({result: message});
     }
   });
 });

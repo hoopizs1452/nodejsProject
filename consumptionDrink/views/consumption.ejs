@@ -17,9 +17,9 @@
                             //$('body').append(data.result);
                             for (var i = 0; i < data.length; i++) {
                                 //document.body.append(data[i].name);
-                                $('#result').append(data[i].date.substr(0,10));
-                                $('#result').append(data[i].name);
-                                $('#result').append(data[i].price);
+                                $('#result').append(data[i].date.substr(0,10) + " ");
+                                $('#result').append(data[i].name + " ");
+                                $('#result').append(data[i].price + "\n");
                             }
                         }
                     );
